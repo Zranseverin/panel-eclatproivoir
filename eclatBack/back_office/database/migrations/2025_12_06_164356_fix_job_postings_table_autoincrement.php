@@ -10,8 +10,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Modify the id column to be auto increment and primary key
-        DB::statement('ALTER TABLE job_postings MODIFY id INT NOT NULL AUTO_INCREMENT, ADD PRIMARY KEY (id)');
+        // Check if the id column is already auto increment
+        $columnInfo = DB::select("SHOW COLUMNS FROM job_postings WHERE Field = 'id'");
+        if (!empty($columnInfo) && strpos($columnInfo[0]->Type, 'auto_increment') === false) {
+            // Modify the id column to be auto increment
+            DB::statement('ALTER TABLE job_postings MODIFY id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT');
+        }
     }
 
     /**
