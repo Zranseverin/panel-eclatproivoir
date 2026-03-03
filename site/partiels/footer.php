@@ -14,24 +14,24 @@
                     <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">
                         Quick Links</h4>
                     <div class="d-flex flex-column justify-content-start">
-                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>Home</a>
-                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>About Us</a>
-                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>Our Services</a>
-                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>Meet The Team</a>
-                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>Latest Blog</a>
-                        <a class="text-light" href="#!"><i class="fa fa-angle-right me-2"></i>Contact Us</a>
+                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>Accueil</a>
+                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>A propos</a>
+                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i> Nos Services</a>
+                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i> Notre Equipe</a>
+                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i> Derniers Blogs</a>
+                        <a class="text-light" href="#!"><i class="fa fa-angle-right me-2"></i>Contact </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="d-inline-block text-primary text-uppercase border-bottom border-5 border-secondary mb-4">
                         Popular Links</h4>
                     <div class="d-flex flex-column justify-content-start">
-                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>Home</a>
-                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>About Us</a>
-                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>Our Services</a>
-                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>Meet The Team</a>
-                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>Latest Blog</a>
-                        <a class="text-light" href="#!"><i class="fa fa-angle-right me-2"></i>Contact Us</a>
+                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>Accueil</a>
+                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i>A propos</a>
+                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i> Nos Services</a>
+                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i> Notre Equipe</a>
+                        <a class="text-light mb-2" href="#!"><i class="fa fa-angle-right me-2"></i> Derniers Blogs</a>
+                        <a class="text-light" href="#!"><i class="fa fa-angle-right me-2"></i>Contact </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -40,7 +40,7 @@
                     <form action="">
                         <div class="input-group">
                             <input type="text" class="form-control p-3 border-0" placeholder="Your Email Address">
-                            <button class="btn btn-primary">Sign Up</button>
+                            <button class="btn btn-primary">Inscription</button>
                         </div>
                     </form>
                     <h6 class="text-primary text-uppercase mt-4 mb-3">Follow Us</h6>
