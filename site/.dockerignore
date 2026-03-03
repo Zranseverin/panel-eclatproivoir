@@ -1,0 +1,19 @@
+# Docker ignore file
+.git
+.gitignore
+README.md
+Dockerfile
+docker-compose.yml
+.dockerignore
+.env
+.env.example
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+*.md
+*.log
+.DS_Store
+Thumbs.db
+.vscode
+.idea
