@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ConfigLogo extends Model
+class HeaderContact extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class ConfigLogo extends Model
      *
      * @var string
      */
-    protected $table = 'config_logo';
+    protected $table = 'header_contacts';
 
     /**
      * The attributes that are mass assignable.
@@ -22,19 +22,15 @@ class ConfigLogo extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'logo_path',
-        'alt_text',
-        'site_title',
-    ];
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
+        'phone',
+        'email',
+        'address',
+        'facebook',
+        'twitter',
+        'linkedin',
+        'instagram',
+        'youtube',
+        'is_active',
     ];
 
     /**
@@ -45,8 +41,17 @@ class ConfigLogo extends Model
     protected function casts(): array
     {
         return [
+            'is_active' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Get the active header contact configuration.
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
     }
 }

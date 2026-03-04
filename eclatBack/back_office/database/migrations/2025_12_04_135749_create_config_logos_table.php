@@ -17,6 +17,7 @@ return new class extends Migration
                 $table->id();
                 $table->string('logo_path', 255);
                 $table->string('alt_text', 255)->default('Logo');
+                $table->string('site_title', 255)->default('EPI - Eclat pro Ivoire');
                 $table->timestamp('created_at')->useCurrent();
                 $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             });

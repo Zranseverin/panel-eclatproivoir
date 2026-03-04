@@ -17,6 +17,9 @@ use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\EmailConfigController;
 use App\Http\Controllers\NewsletterSubscriberController;
 use App\Http\Controllers\JobPostingController;
+use App\Http\Controllers\HeaderContactController;
+use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\NavbarBrandController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -105,6 +108,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         // Job Postings Routes
         Route::resource('job-postings', JobPostingController::class);
+        
+        // Header Contact Management Routes
+        Route::resource('header-contacts', HeaderContactController::class)->parameters(['header-contacts' => 'headerContact']);
+        
+        // Navbar Management Routes
+        Route::resource('navbars', NavbarController::class)->parameters(['navbars' => 'navbar']);
+        
+        // Navbar Brand Management Routes
+        Route::resource('navbar-brands', NavbarBrandController::class)->parameters(['navbar-brands' => 'navbarBrand']);
     });
 });
 

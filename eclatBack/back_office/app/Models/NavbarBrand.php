@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ConfigLogo extends Model
+class NavbarBrand extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class ConfigLogo extends Model
      *
      * @var string
      */
-    protected $table = 'config_logo';
+    protected $table = 'navbar_brands';
 
     /**
      * The attributes that are mass assignable.
@@ -23,18 +23,11 @@ class ConfigLogo extends Model
      */
     protected $fillable = [
         'logo_path',
-        'alt_text',
-        'site_title',
-    ];
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'created_at',
-        'updated_at',
+        'logo_alt',
+        'brand_name',
+        'brand_url',
+        'logo_height',
+        'is_active',
     ];
 
     /**
@@ -45,8 +38,26 @@ class ConfigLogo extends Model
     protected function casts(): array
     {
         return [
+            'logo_height' => 'integer',
+            'is_active' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Get the active navbar brand configuration.
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    /**
+     * Get the latest active brand configuration.
+     */
+    public function scopeLatestActive($query)
+    {
+        return $query->where('is_active', true)->latest();
     }
 }

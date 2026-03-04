@@ -26,6 +26,7 @@
                                 <th>ID</th>
                                 <th>Logo</th>
                                 <th>Alt Text</th>
+                                <th>Site Title</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
@@ -47,6 +48,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $logo->alt_text }}</td>
+                                    <td>{{ $logo->site_title ?? 'N/A' }}</td>
                                     <td>{{ $logo->created_at->format('M d, Y H:i') }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
@@ -61,7 +63,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">No logos found</td>
+                                    <td colspan="6" class="text-center">No logos found</td>
                                 </tr>
                             @endforelse
                         </tbody>

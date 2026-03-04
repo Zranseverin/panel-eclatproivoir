@@ -32,6 +32,7 @@ class ConfigLogoController extends Controller
         $request->validate([
             'logo_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'alt_text' => 'nullable|string|max:255',
+            'site_title' => 'nullable|string|max:255',
         ]);
 
         // Handle file upload
@@ -46,6 +47,7 @@ class ConfigLogoController extends Controller
         $logo = ConfigLogo::create([
             'logo_path' => $logoUrl ?? $logoPath ?? '', // Use URL if available, otherwise use path
             'alt_text' => $request->alt_text ?? 'Logo',
+            'site_title' => $request->site_title ?? 'EPI - Eclat pro Ivoire',
         ]);
 
         return redirect()->route('admin.logos.index')
@@ -76,6 +78,7 @@ class ConfigLogoController extends Controller
         $request->validate([
             'logo_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'alt_text' => 'nullable|string|max:255',
+            'site_title' => 'nullable|string|max:255',
         ]);
 
         // Handle file upload
@@ -94,11 +97,13 @@ class ConfigLogoController extends Controller
             $logo->update([
                 'logo_path' => $logoUrl,
                 'alt_text' => $request->alt_text ?? $logo->alt_text,
+                'site_title' => $request->site_title ?? $logo->site_title,
             ]);
         } else {
-            // Update only alt text if no new image is uploaded
+            // Update only alt text and site title if no new image is uploaded
             $logo->update([
                 'alt_text' => $request->alt_text ?? $logo->alt_text,
+                'site_title' => $request->site_title ?? $logo->site_title,
             ]);
         }
 

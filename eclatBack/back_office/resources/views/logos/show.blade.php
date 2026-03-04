@@ -29,6 +29,11 @@
                             <label class="form-label">Alt Text</label>
                             <p class="form-control-plaintext">{{ $logo->alt_text }}</p>
                         </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Site Title</label>
+                            <p class="form-control-plaintext">{{ $logo->site_title ?? 'EPI - Eclat pro Ivoire' }}</p>
+                        </div>
                     </div>
                     
                     <div class="col-md-6">

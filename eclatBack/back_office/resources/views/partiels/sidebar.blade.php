@@ -98,7 +98,10 @@
                     </div>
                     <small class="mb-0">Contenu de remplacement</small>
                   </div>
-                  <a href="{{ route('admin.logos.index') }}" class="list-group-item"><i class="bi bi-box"></i>Logo</a>
+                  <a href="{{ route('admin.logos.index') }}" class="list-group-item"><i class="bi bi-box"></i>Head</a>
+                  <a href="{{ route('admin.navbar-brands.index') }}" class="list-group-item"><i class="bi bi-receipt"></i>section logo</a>
+                  <a href="{{ route('admin.header-contacts.index') }}" class="list-group-item"><i class="bi bi-receipt"></i>Header</a>
+                  <a href="{{ route('admin.navbars.index') }}" class="list-group-item"><i class="bi bi-receipt"></i>Menu</a>
                   <a href="{{ route('admin.hero_contents.index') }}" class="list-group-item"><i class="bi bi-bar-chart"></i>hero section</a>
                    <a href="{{ route('admin.services.index') }}" class="list-group-item"><i class="bi bi-bar-chart"></i>Services</a>
                     <a href="{{ route('admin.pricing_plans.index') }}" class="list-group-item"><i class="bi bi-bar-chart"></i>Formule</a>

@@ -32,6 +32,15 @@
                         @enderror
                     </div>
                     
+                    <div class="mb-3">
+                        <label for="site_title" class="form-label">Site Title</label>
+                        <input type="text" class="form-control" id="site_title" name="site_title" value="{{ old('site_title', 'EPI - Eclat pro Ivoire') }}">
+                        @error('site_title')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                        <div class="form-text">This title will appear in the browser tab</div>
+                    </div>
+                    
                     <div class="d-flex gap-2">
                         <button type="submit" class="btn btn-primary">Save Logo</button>
                         <a href="{{ route('admin.logos.index') }}" class="btn btn-secondary">Cancel</a>
