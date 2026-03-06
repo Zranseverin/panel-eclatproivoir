@@ -102,7 +102,8 @@
                   <a href="{{ route('admin.navbar-brands.index') }}" class="list-group-item"><i class="bi bi-receipt"></i>section logo</a>
                   <a href="{{ route('admin.header-contacts.index') }}" class="list-group-item"><i class="bi bi-receipt"></i>Header</a>
                   <a href="{{ route('admin.navbars.index') }}" class="list-group-item"><i class="bi bi-receipt"></i>Menu</a>
-                  <a href="{{ route('admin.hero_contents.index') }}" class="list-group-item"><i class="bi bi-bar-chart"></i>hero section</a>
+                  <a href="{{ route('admin.hero-slides.index') }}" class="list-group-item"><i class="bi bi-bar-chart"></i>Hero section</a>
+                   <a href="{{ route('admin.about-us.index') }}" class="list-group-item"><i class="bi bi-bar-chart"></i>Section a propos</a>
                    <a href="{{ route('admin.services.index') }}" class="list-group-item"><i class="bi bi-bar-chart"></i>Services</a>
                     <a href="{{ route('admin.pricing_plans.index') }}" class="list-group-item"><i class="bi bi-bar-chart"></i>Formule</a>
                      <a href="{{ route('admin.blog_posts.index') }}" class="list-group-item"><i class="bi bi-bar-chart"></i>Guide</a>

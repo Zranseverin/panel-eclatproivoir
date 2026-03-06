@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConfigLogoController;
 use App\Http\Controllers\HeroContentController;
+use App\Http\Controllers\HeroSlideController;
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PricingPlanController;
@@ -59,6 +61,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         // Hero Content Management Routes
         Route::resource('hero_contents', HeroContentController::class)->parameters(['hero_contents' => 'heroContent']);
+        
+        // Hero Slides Management Routes
+        Route::resource('hero-slides', HeroSlideController::class);
         
         // Services Management Routes
         Route::resource('services', ServiceController::class);
@@ -117,6 +122,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         // Navbar Brand Management Routes
         Route::resource('navbar-brands', NavbarBrandController::class)->parameters(['navbar-brands' => 'navbarBrand']);
+        
+        // About Us Management Routes
+        Route::resource('about-us', AboutUsController::class);
     });
 });
 

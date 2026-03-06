@@ -1,8 +1,15 @@
-<div class="container-fluid sticky-top bg-white shadow-sm">
+<?php
+require_once __DIR__ . '/../config.php';
+$navItems = getActiveNavbarItems();
+$navbarBrand = getNavbarBrand();
+$current_page = basename($_SERVER['PHP_SELF']);
+?><div class="container-fluid sticky-top bg-white shadow-sm">
         <div class="container">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
-                <a href="index.php" class="navbar-brand">
-                    <img src="img/logo.jpg" alt="eclat pro ivoir" style="height: 100px;">
+                <a href="<?php echo htmlspecialchars($navbarBrand['brand_url']); ?>" class="navbar-brand">
+                    <img src="<?php echo htmlspecialchars($navbarBrand['logo_path']); ?>" 
+                         alt="<?php echo htmlspecialchars($navbarBrand['logo_alt']); ?>" 
+                         style="height: <?php echo $navbarBrand['logo_height']; ?>px;">
                    
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -10,24 +17,33 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="index.php" class="nav-item nav-link active">Accueil</a>
-                        <a href="about.php" class="nav-item nav-link">A propos</a>
-                        <a href="service.php" class="nav-item nav-link">Service</a>
-                        <a href="price.php" class="nav-item nav-link">Prix</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="blog.php" class="dropdown-item">Blog Grid</a>
-                                <a href="detail.php" class="dropdown-item">Blog Detail</a>
-                                <a href="team.php" class="dropdown-item">The Team</a>
-                                <a href="testimonial.php" class="dropdown-item">Testimonial</a>
-                                <a href="appointment.php" class="dropdown-item">Appointment</a>
-                                <a href="search.php" class="dropdown-item">Search</a>
-                            </div>
-                        </div>
-                        <a href="contact.php" class="nav-item nav-link">Contact</a>
+                        <?php foreach ($navItems as $item): ?>
+                            <?php if (!empty($item['children']) && is_array($item['children'])): ?>
+                                <!-- Dropdown menu -->
+                                <div class="nav-item dropdown">
+                                    <a href="<?php echo htmlspecialchars($item['url']); ?>" 
+                                       class="nav-link dropdown-toggle"
+                                       data-bs-toggle="dropdown">
+                                        <?php echo htmlspecialchars($item['title']); ?>
+                                    </a>
+                                    <div class="dropdown-menu m-0">
+                                        <?php foreach ($item['children'] as $child): ?>
+                                            <a href="<?php echo htmlspecialchars($child['url']); ?>" 
+                                               class="dropdown-item <?php echo $current_page === ltrim($child['url'], '/') ? 'active' : ''; ?>">
+                                                <?php echo htmlspecialchars($child['title']); ?>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php else: ?>
+                                <!-- Regular menu item -->
+                                <a href="<?php echo htmlspecialchars($item['url']); ?>" 
+                                   class="nav-item nav-link <?php echo $current_page === ltrim($item['url'], '/') ? 'active' : ''; ?>">
+                                    <?php echo htmlspecialchars($item['title']); ?>
+                                </a>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </nav>
         </div>
-</```

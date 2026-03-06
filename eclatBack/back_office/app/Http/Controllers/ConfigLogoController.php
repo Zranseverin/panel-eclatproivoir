@@ -38,14 +38,12 @@ class ConfigLogoController extends Controller
         // Handle file upload
         if ($request->hasFile('logo_image')) {
             $imagePath = $request->file('logo_image')->store('logos', 'public');
-            $logoPath = 'storage/' . $imagePath;
-            
-            // Store the full URL in the database
-            $logoUrl = asset($logoPath);
+            // Store relative path for API compatibility
+            $logoPath = '/storage/' . $imagePath;
         }
 
         $logo = ConfigLogo::create([
-            'logo_path' => $logoUrl ?? $logoPath ?? '', // Use URL if available, otherwise use path
+            'logo_path' => $logoPath ?? '',
             'alt_text' => $request->alt_text ?? 'Logo',
             'site_title' => $request->site_title ?? 'EPI - Eclat pro Ivoire',
         ]);
@@ -84,18 +82,16 @@ class ConfigLogoController extends Controller
         // Handle file upload
         if ($request->hasFile('logo_image')) {
             // Delete old image if it exists
-            if ($logo->logo_path && file_exists(public_path(parse_url($logo->logo_path, PHP_URL_PATH)))) {
-                unlink(public_path(parse_url($logo->logo_path, PHP_URL_PATH)));
+            if ($logo->logo_path && file_exists(public_path($logo->logo_path))) {
+                unlink(public_path($logo->logo_path));
             }
             
             $imagePath = $request->file('logo_image')->store('logos', 'public');
-            $logoPath = 'storage/' . $imagePath;
-            
-            // Store the full URL in the database
-            $logoUrl = asset($logoPath);
+            // Store relative path for API compatibility
+            $logoPath = '/storage/' . $imagePath;
             
             $logo->update([
-                'logo_path' => $logoUrl,
+                'logo_path' => $logoPath,
                 'alt_text' => $request->alt_text ?? $logo->alt_text,
                 'site_title' => $request->site_title ?? $logo->site_title,
             ]);
@@ -118,9 +114,8 @@ class ConfigLogoController extends Controller
     {
         // Delete the image file if it exists
         if ($logo->logo_path) {
-            $path = parse_url($logo->logo_path, PHP_URL_PATH);
-            if ($path && file_exists(public_path($path))) {
-                unlink(public_path($path));
+            if (file_exists(public_path($logo->logo_path))) {
+                unlink(public_path($logo->logo_path));
             }
         }
         

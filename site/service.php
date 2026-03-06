@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
- <title>EPI - Eclat pro Ivoire - Service</title>
 <?php include 'partiels/head.php';?>
 <body>
     <!-- Topbar Start -->

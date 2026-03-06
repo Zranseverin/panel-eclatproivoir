@@ -20,9 +20,18 @@ class ConfigLogoApiController extends Controller
     {
         $configs = ConfigLogo::all();
         
+        // Convert logo_path to full URL for each config
+        $configsData = $configs->map(function ($config) {
+            $configData = $config->toArray();
+            if (!empty($config->logo_path)) {
+                $configData['logo_path'] = $this->getFullUrl($config->logo_path);
+            }
+            return $configData;
+        });
+        
         return response()->json([
             'success' => true,
-            'data' => $configs
+            'data' => $configsData
         ], 200);
     }
 
@@ -93,9 +102,15 @@ class ConfigLogoApiController extends Controller
             ], 404);
         }
 
+        // Convert logo_path to full URL
+        $configData = $config->toArray();
+        if (!empty($config->logo_path)) {
+            $configData['logo_path'] = $this->getFullUrl($config->logo_path);
+        }
+
         return response()->json([
             'success' => true,
-            'data' => $config
+            'data' => $configData
         ], 200);
     }
 
@@ -230,9 +245,35 @@ class ConfigLogoApiController extends Controller
             ], 404);
         }
 
+        // Convert logo_path to full URL
+        $configData = $config->toArray();
+        if (!empty($config->logo_path)) {
+            $configData['logo_path'] = $this->getFullUrl($config->logo_path);
+        }
+
         return response()->json([
             'success' => true,
-            'data' => $config
+            'data' => $configData
         ], 200);
+    }
+    
+    /**
+     * Get full URL for a given path using config('app.url')
+     * 
+     * @param string $path
+     * @return string
+     */
+    private function getFullUrl(string $path): string
+    {
+        // If it's already a full URL, return as is
+        if (filter_var($path, FILTER_VALIDATE_URL)) {
+            return $path;
+        }
+        
+        // Remove leading slash if present
+        $path = ltrim($path, '/');
+        
+        // Build URL using config app.url
+        return rtrim(config('app.url'), '/') . '/' . $path;
     }
 }

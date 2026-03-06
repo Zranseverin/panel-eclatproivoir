@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
- <title>EPI - Eclat pro Ivoire - Accueil</title>
-<?php include 'partiels/head.php';?>
+<?php 
+include 'partiels/head.php';
+
+// Fetch hero slides from API using helper function
+$heroSlides = getHeroSlides();
+
+// Fetch about us content from API
+$aboutUs = getAboutUsContent();
+?>
 
 <body>
     <!-- Topbar Start -->
@@ -18,51 +25,34 @@
     <!-- Hero Start -->
     <div id="heroCarousel" class="container-fluid bg-info py-5 mb-5 hero-header carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
         <div class="carousel-inner">
-            <div class="carousel-item active" style="background: url('img/hero.jpg') top right no-repeat; background-size: cover;">
+            <?php foreach ($heroSlides as $index => $slide): ?>
+            <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>" 
+                 style="background: url('<?php echo htmlspecialchars($slide['background_image']); ?>') top right no-repeat; background-size: cover;">
                 <div class="container py-5">
-                    <div class="row justify-content-start">
-                        <div class="col-lg-8 text-center text-lg-start">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 text-center">
                             <h5 class="d-inline-block text-info text-uppercase border-bottom border-5"
-                                style="border-color: rgba(256, 256, 256, .3) !important;">Welcome To Medinova</h5>
-                            <h1 class="display-1 text-white mb-md-4">Best Healthcare Solution In Your City</h1>
+                                style="border-color: rgba(256, 256, 256, .3) !important;"><?php echo htmlspecialchars($slide['title']); ?></h5>
+                            <h1 class="display-1 text-white mb-md-4"><?php echo htmlspecialchars($slide['subtitle']); ?></h1>
+                            <?php if (!empty($slide['button1_text']) || !empty($slide['button2_text'])): ?>
                             <div class="pt-2">
-                                <a href="#!" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Find Doctor</a>
-                                <a href="#!" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Appointment</a>
+                                <?php if (!empty($slide['button1_text'])): ?>
+                                <a href="<?php echo htmlspecialchars($slide['button1_url']); ?>" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">
+                                    <?php echo htmlspecialchars($slide['button1_text']); ?>
+                                </a>
+                                <?php endif; ?>
+                                <?php if (!empty($slide['button2_text'])): ?>
+                                <a href="<?php echo htmlspecialchars($slide['button2_url']); ?>" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">
+                                    <?php echo htmlspecialchars($slide['button2_text']); ?>
+                                </a>
+                                <?php endif; ?>
                             </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="carousel-item" style="background: url('img/about.jpg') top right no-repeat; background-size: cover;">
-                <div class="container py-5">
-                    <div class="row justify-content-start">
-                        <div class="col-lg-8 text-center text-lg-start">
-                            <h5 class="d-inline-block text-info text-uppercase border-bottom border-5"
-                                style="border-color: rgba(256, 256, 256, .3) !important;">Quality Healthcare</h5>
-                            <h1 class="display-1 text-white mb-md-4">Advanced Medical Technology</h1>
-                            <div class="pt-2">
-                                <a href="#!" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Learn More</a>
-                                <a href="#!" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Services</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item" style="background: url('img/team-1.jpg') top right no-repeat; background-size: cover;">
-                <div class="container py-5">
-                    <div class="row justify-content-start">
-                        <div class="col-lg-8 text-center text-lg-start">
-                            <h5 class="d-inline-block text-info text-uppercase border-bottom border-5"
-                                style="border-color: rgba(256, 256, 256, .3) !important;">Expert Doctors</h5>
-                            <h1 class="display-1 text-white mb-md-4">Trusted Medical Professionals</h1>
-                            <div class="pt-2">
-                                <a href="#!" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Meet Our Team</a>
-                                <a href="#!" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -82,45 +72,62 @@
             <div class="row gx-5">
                 <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100 rounded" src="img/about.jpg"
-                            style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100 rounded" 
+                             src="<?php echo !empty($aboutUs['image_path']) ? htmlspecialchars($aboutUs['image_path']) : 'img/about.jpg'; ?>"
+                             style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="mb-4">
-                        <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">About Us</h5>
-                        <h1 class="display-4">Best Medical Care For Yourself and Your Family</h1>
+                        <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">
+                            <?php echo htmlspecialchars($aboutUs['title'] ?? 'About Us'); ?>
+                        </h5>
+                        <h1 class="display-4">
+                            <?php echo htmlspecialchars($aboutUs['subtitle'] ?? 'Best Medical Care For Yourself and Your Family'); ?>
+                        </h1>
                     </div>
-                    <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor
-                        voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum
-                        et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur
-                        takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore.
-                        Amet erat amet et magna</p>
+                    <p><?php echo nl2br(htmlspecialchars($aboutUs['description'] ?? '')); ?></p>
                     <div class="row g-3 pt-3">
+                        <?php if(!empty($aboutUs['feature1_icon'])): ?>
                         <div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
-                                <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
-                                <h6 class="mb-0">Qualified<small class="d-block text-primary">Doctors</small></h6>
+                                <i class="<?php echo htmlspecialchars($aboutUs['feature1_icon']); ?> text-primary mb-3"></i>
+                                <h6 class="mb-0">
+                                    <?php echo htmlspecialchars($aboutUs['feature1_title'] ?? 'Qualified Doctors'); ?>
+                                </h6>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php if(!empty($aboutUs['feature2_icon'])): ?>
                         <div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
-                                <i class="fa fa-3x fa-procedures text-primary mb-3"></i>
-                                <h6 class="mb-0">Emergency<small class="d-block text-primary">Services</small></h6>
+                                <i class="<?php echo htmlspecialchars($aboutUs['feature2_icon']); ?> text-primary mb-3"></i>
+                                <h6 class="mb-0">
+                                    <?php echo htmlspecialchars($aboutUs['feature2_title'] ?? 'Emergency Services'); ?>
+                                </h6>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php if(!empty($aboutUs['feature3_icon'])): ?>
                         <div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
-                                <i class="fa fa-3x fa-microscope text-primary mb-3"></i>
-                                <h6 class="mb-0">Accurate<small class="d-block text-primary">Testing</small></h6>
+                                <i class="<?php echo htmlspecialchars($aboutUs['feature3_icon']); ?> text-primary mb-3"></i>
+                                <h6 class="mb-0">
+                                    <?php echo htmlspecialchars($aboutUs['feature3_title'] ?? 'Accurate Testing'); ?>
+                                </h6>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php if(!empty($aboutUs['feature4_icon'])): ?>
                         <div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
-                                <i class="fa fa-3x fa-ambulance text-primary mb-3"></i>
-                                <h6 class="mb-0">Free<small class="d-block text-primary">Ambulance</small></h6>
+                                <i class="<?php echo htmlspecialchars($aboutUs['feature4_icon']); ?> text-primary mb-3"></i>
+                                <h6 class="mb-0">
+                                    <?php echo htmlspecialchars($aboutUs['feature4_title'] ?? 'Free Ambulance'); ?>
+                                </h6>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
